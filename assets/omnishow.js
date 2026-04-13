@@ -1550,10 +1550,11 @@
         const scaledStackWidth = stack.scrollWidth;
         const naturalStackWidth = scaledStackWidth / currentCompareScale;
 
-        let compareScale = 1;
+        const maxScale = ["r2v", "ra2v", "rp2v"].includes(section.id) ? 0.8 : 1;
+        let compareScale = maxScale;
         if (naturalStackWidth > 0 && containerWidth > 0) {
           compareScale = containerWidth / (naturalStackWidth + 36);
-          if (compareScale > 1) compareScale = 1;
+          if (compareScale > maxScale) compareScale = maxScale;
         }
         
         let scaleChanged = false;

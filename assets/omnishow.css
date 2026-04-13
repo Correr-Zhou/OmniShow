@@ -687,6 +687,12 @@ strong {
   --compare-scale: 1;
 }
 
+.task-section#r2v,
+.task-section#ra2v,
+.task-section#rp2v {
+  --compare-scale: 0.8;
+}
+
 .task-section#rap2v .compare-stack {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
