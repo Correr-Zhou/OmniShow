@@ -123,10 +123,44 @@
           </div>
         </div>
 
-        <div class="portrait-video hero-teaser portrait-video-hero" id="heroTeaser">
-          <video class="lazy-video" id="heroTeaserVideo" muted loop playsinline preload="none">
+        <div class="portrait-video hero-teaser portrait-video-hero hero-video-idle" id="heroTeaser">
+          <video id="heroTeaserVideo" playsinline preload="auto" data-keep-controls-when-playing="true">
             <source src="./assets/omnishow_intro_720p.mp4" type="video/mp4" />
           </video>
+          <button class="hero-video-btn hero-video-btn-play" id="heroVideoPlayBtn" type="button" aria-label="Play video">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M8 5v14l12-7L8 5z"></path>
+            </svg>
+          </button>
+          <button
+            class="hero-video-btn hero-video-btn-replay"
+            id="heroVideoReplayBtn"
+            type="button"
+            aria-label="Replay video"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path
+                d="M4 12a8 8 0 0 1 13.66-5.66"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M18 4v5h-5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M20 12a8 8 0 0 1-13.66 5.66"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
         </div>
 
         <p class="hero-tldr">

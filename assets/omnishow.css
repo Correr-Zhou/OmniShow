@@ -1751,6 +1751,72 @@ main video,
   cursor: zoom-in;
 }
 
+#heroTeaserVideo {
+  cursor: default;
+}
+
+.hero-video-idle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  pointer-events: none;
+}
+
+.hero-video-idle #heroTeaserVideo {
+  filter: blur(3px) saturate(115%) brightness(0.86);
+  transform: scale(1.02);
+}
+
+.hero-video-idle .hero-video-btn {
+  opacity: 1;
+}
+
+.hero-video-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.42);
+  color: rgba(255, 255, 255, 0.94);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease, opacity 0.16s ease;
+}
+
+.hero-video-btn:hover {
+  transform: translate(-50%, -50%) scale(1.03);
+  background: rgba(0, 0, 0, 0.52);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.hero-video-btn:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+.hero-video-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.28);
+  outline-offset: 4px;
+}
+
+.hero-video-btn[hidden] {
+  display: none;
+}
+
+.hero-video-btn {
+  z-index: 3;
+}
+
 .media-lightbox {
   position: fixed;
   inset: 0;

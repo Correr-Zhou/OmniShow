@@ -766,6 +766,108 @@
     window.addEventListener("resize", () => requestAnimationFrame(updateWidth));
   };
 
+  const enableHeroVideoControls = () => {
+    const video = document.getElementById("heroTeaserVideo");
+    const wrap = document.getElementById("heroTeaser");
+    const playBtn = document.getElementById("heroVideoPlayBtn");
+    const replayBtn = document.getElementById("heroVideoReplayBtn");
+    if (!video || !wrap || !playBtn || !replayBtn) return;
+
+    let hasStarted = false;
+
+    // Ensure the hero video is eagerly loaded but not auto-started.
+    try {
+      video.removeAttribute("autoplay");
+      video.removeAttribute("loop");
+      video.autoplay = false;
+      video.loop = false;
+      video.preload = "auto";
+    } catch (_) {}
+
+    pauseVideoSafely(video);
+    try {
+      video.load();
+    } catch (_) {}
+
+    const showPlay = () => {
+      if (hasStarted) return;
+      playBtn.hidden = false;
+      replayBtn.hidden = true;
+      wrap.classList.add("hero-video-idle");
+      try {
+        video.controls = false;
+      } catch (_) {}
+    };
+
+    const showReplay = () => {
+      playBtn.hidden = true;
+      replayBtn.hidden = false;
+      wrap.classList.add("hero-video-idle");
+      try {
+        video.controls = false;
+      } catch (_) {}
+    };
+
+    const hideAll = () => {
+      playBtn.hidden = true;
+      replayBtn.hidden = true;
+      wrap.classList.remove("hero-video-idle");
+    };
+
+    const playNow = () => {
+      hideAll();
+      hasStarted = true;
+      try {
+        // Keep native controls (progress bar etc.) while playing.
+        video.controls = true;
+      } catch (_) {}
+      try {
+        const p = video.play();
+        if (p && typeof p.catch === "function") {
+          p.catch(() => {
+            // If playback fails for any reason, fall back to showing play again.
+            showPlay();
+          });
+        }
+      } catch (_) {
+        showPlay();
+      }
+    };
+
+    showPlay();
+
+    playBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      playNow();
+    });
+
+    replayBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      try {
+        video.currentTime = 0;
+      } catch (_) {}
+      playNow();
+    });
+
+    video.addEventListener("play", () => {
+      hideAll();
+      hasStarted = true;
+      try {
+        video.controls = true;
+      } catch (_) {}
+    });
+    video.addEventListener("ended", showReplay);
+    video.addEventListener("pause", () => {
+      if (video.ended) {
+        showReplay();
+        return;
+      }
+      // Mid-play pauses are handled by native controls; don't show overlays.
+    });
+  };
+
   const enableHoverControls = (root) => {
     const base = root || document;
     const allVideos = Array.from(base.querySelectorAll("video"));
@@ -776,6 +878,7 @@
         video.controls = true;
       });
       video.addEventListener("mouseleave", () => {
+        if (video.dataset && video.dataset.keepControlsWhenPlaying === "true" && !video.paused) return;
         video.controls = false;
       });
     });
@@ -1356,8 +1459,7 @@
       const el = t.closest("img, video");
       if (!el) return;
       if (el.closest(".media-lightbox")) return;
-      const isHeroTeaser = el.id === "heroTeaserVideo";
-      if (!isHeroTeaser && !el.closest("main")) return;
+      if (!el.closest("main")) return;
       if (el.tagName === "IMG") {
         e.preventDefault();
         openImg(el);
@@ -1511,6 +1613,7 @@
       await hydrateTaskSections();
     } catch (_) {}
     enableHeroTeaser();
+    enableHeroVideoControls();
     enableHoverControls();
     enableMediaLightbox();
     enableAutoScrollText();
