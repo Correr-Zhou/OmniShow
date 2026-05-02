@@ -518,8 +518,59 @@ strong {
   font-style: italic;
 }
 
+.hero-venue {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.hero-venue-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  isolation: isolate;
+}
+
+.hero-venue-badge::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  z-index: 0;
+  transform: translateX(-50%) scale(1.12, 0.9);
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  filter: blur(18px);
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.hero-venue-label {
+  position: relative;
+  z-index: 1;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(255, 249, 232, 0.48),
+    0 0 36px rgba(255, 236, 188, 0.2);
+}
+
 .hero-teaser {
-  margin: 44px auto 0;
+  margin: 28px auto 0;
   max-width: 100%;
 }
 
