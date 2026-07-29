@@ -36,6 +36,7 @@ Yichen Liu<sup>2</sup>, Xin Gao<sup>2</sup>, Cunjian Chen<sup>3</sup>, Shilei We
 
 ## 🔥 Updates
 
+- 2026.07: The evaluation code of HOIVG-Bench is released!
 - 2026.05: Training and inference code for Wan-based models is released!
 - 2026.05: OmniShow is accepted by ICML 2026! 🎉
 - 2026.04: The [Data of HOIVG-Bench](https://huggingface.co/datasets/donghao-zhou/HOIVG-Bench) is available on HuggingFace! 🤗
@@ -129,7 +130,7 @@ OmniShow achieves overall state-of-the-art performance across various multimodal
 - [x] Training Code (Wan-Based)
 - [x] Inference Code (Wan-Based)
 - [x] Data of HOIVG-Bench
-- [ ] Evaluation Code of HOIVG-Bench
+- [x] Evaluation Code of HOIVG-Bench
 
 
 ## 🛠️ Environment Setup
@@ -404,11 +405,17 @@ OmniShow/
 ├── run_infer/                      # Inference entrypoint and example launcher script.
 │   ├── infer_omnishow_wan.py
 │   └── infer_omnishow_wan.sh
+├── evaluation/                     # HOIVG-Bench evaluation pipeline and vendored metric adapters.
 ├── download_weights.sh             # Downloads Wan, tokenizer, and audio encoder weights.
 ├── download_data.sh                # Downloads the OmniShow example dataset.
 ├── requirements.txt                # Python dependencies used by the release.
 └── README.md                       # Project overview and usage instructions.
 ```
+
+
+## 📊 Evaluation
+
+The `evaluation/` folder provides the HOIVG-Bench evaluation pipeline. It runs the selected metric families with separate evaluator environments and merges the results into a unified `final_report.csv`. For environment setup, checkpoint preparation, input format, and usage commands, please see the [evaluation README](evaluation/README.md).
 
 
 ## ⚖️ Ethics
