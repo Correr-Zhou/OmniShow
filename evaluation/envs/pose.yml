@@ -1,0 +1,19 @@
+name: pose-eval
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - ffmpeg
+  - pytorch=2.5.1
+  - pytorch-cuda=12.4
+  - pip:
+      - numpy
+      - pandas
+      - opencv-python-headless
+      - onnxruntime-gpu
+      - tqdm
+      - scipy
+      - matplotlib

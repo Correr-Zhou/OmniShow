@@ -1,0 +1,10 @@
+gradio==4.16.0
+mmdet==3.3.0
+mmengine==0.10.6
+mmyolo==0.6.0
+diffusers==0.33.1
+transformers==4.51.3
+supervision
+decord
+
+# pip install flash-attn --no-build-isolation
